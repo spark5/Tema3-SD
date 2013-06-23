@@ -1,0 +1,24 @@
+/**
+ *Oncioiu Anamaria Raluca, 313CA, Tema3, Data: 26.04.2011 
+ */
+ 
+ 
+ 		##Arhiva contine interfata si functiile pentru tipul de date lista dublu inlantuita, implementarea temei si functiile pentru hashtable, un makefile cu target-uri build si clean.
+ 
+ 
+ 		Pentru a trata coliziunile dintre camere si obiecte, s-a creat un hashtable de camere. Fiecare lista dublu-inlantuita contine in fiecare nod: numele camerei (pot exista camere care sa aiba aceeasi lista asociata) si un pointer la hashtable de obiecte. Fiecare obiect este plasat intr-o anumita lista cu functia MurmurHash(). Mai multe obiecte pot avea asociate aceeasi lista.
+ 		
+ 		Dimensiunea hashtable-ului de camere si dimensiunea fiecarui hashtable de obiecte pentru orice camera sunt exacte: HMAX lungime.
+  
+		Din fisierul de intrare, s-a citit cate un simbol, pentru a sti ce tip de instructiune trebuie indeplinita.
+		
+		Perechile obiect-camera au fost inserate (sau updatate, daca existau) cu functia Hash_insert(). Mai intai, se cauta perechea in tot hashtable-ul de camere si in fiecare hashtable de obiecte asociat unei camere cu functia Hash_search(). Daca nu a fost gasita, se creeaza o lista in hashtable-ul de camere. Pozitia listei este calculata cu functia MurmurHash(). In nodul listei se retine numele camerei si un pointer la un hashtable de obiecte. In acest hashtable, se insereaza obiectul in lista de pe pozitia indicata de functia MurmurHash().
+		
+		Functia Hash_search() cauta daca in hashtable-ul de camere, exista lista asociata camerei cautate. Daca este gasita camera in acea lista de camere, se cauta obiectul in hashtable-ul de obiecte. Daca este gasit, se updateaza continutul. Altfel, este inserat in hashtable. Pentru fiecare obiect s-a asociat o stare: 0 daca s-au introdus fix N obiecte de tipul cautat, sau 1, caz in care numarul obiectelor de acel tip creste, dar nu se stie exact cate obiecte sunt.
+		
+		Pentru a lista ce obiecte sunt intr-o anumita camera, se verifica daca exista in hashtable-ul de camere, lista asociata camerei cautate. Functia Hash_getObj() creeaza un vector de obiecte ce se afla sigur in camera respectiva. Apoi, continutul vectorului este scris in fisierul de output.
+		
+		Pentru a lista ce camere contin un obiect de un anumit tip, se cauta in tot hashtable-ul de camere. Functia Hash_getKeys() verifica daca fiecare camera are in hashtable-ul ei de obiecte, o lista asociata obiectului cautat. Daca numarul de obiecte de tipul cautat este >= 1, atunci se printeaza camera in fisierul de output.
+		
+		Pentru a afisa numarul de obiecte de un anumit tip dintr-o anumita camera, se cauta camera in lista asociata camerei(daca exista). Daca se gaseste camera, se cauta in hashtable-ul de obiecte. Daca starea obiectului este cunoscuta, atunci se printeaza in fisierul de output cantitatea.
+		
